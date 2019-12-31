@@ -7,6 +7,7 @@ const hostname = '127.0.0.1';
 const port = 420;
 const template = fs.readFileSync('website/template.html', 'utf8');
 
+//404 response
 function respond404(req,res) {
     res.statusCode = 404;
     res.res.setHeader('Content-Type', 'text/plaintext');
@@ -14,6 +15,7 @@ function respond404(req,res) {
 }
 
 function respond(req,res) {
+    //return index
     if (req.url === "/") {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/html');
@@ -22,6 +24,7 @@ function respond(req,res) {
         });
         res.end(template.replace("{{content}}", reply));
     }
+    //return whatever resource it is
     if (req.url === "/resource") {
         var arguments = url.parse(req.url,true).query;
         try {
